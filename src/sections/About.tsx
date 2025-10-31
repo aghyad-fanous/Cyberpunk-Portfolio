@@ -19,18 +19,19 @@ const aboutData = {
   cvLink: '/Aghyad_Fanous_CV.pdf', // update path if needed
   skills: [
     'React.js',
-    'TypeScript',
-    'Tailwind CSS',
-    'Next.js',
-    'Redux Toolkit',
-    'Node.js',
-    'Express.js',
-    'MongoDB',
-    'Prisma',
-    'Git',
-    'REST APIs',
-    'Responsive Design',
-    'UI/UX Collaboration',
+    'TypeScript',
+    'Node.js',
+    'Express.js',
+    'MongoDB',
+    'Tailwind CSS',
+    'BootstrapCSS',
+    'SQL (Prisma, Sequelize)',
+    'REST APIs',
+    'Git/GitHub',
+    'Clean Code',
+    'Responsive Design',
+    'UI/UX Collaboration',
+    'Vite'
   ],
 };
 
