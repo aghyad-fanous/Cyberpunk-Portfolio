@@ -96,7 +96,7 @@ export function Hero() {
                 style={{ width: '420px', height: '420px' }}
               >
                 <img
-                  src="https://i.ibb.co/MDrxsB4F/Chat-GPT-Image-Jun-27-2025-02-15-28-PM.jpg"
+                  src="https://i.ibb.co/Sw6fbqFt/Untitled.png"
                   alt={t('hero.profileAlt')} 
                   className="w-full h-full object-cover"
                 />
