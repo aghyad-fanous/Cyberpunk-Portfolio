@@ -1,0 +1,86 @@
+{
+  "header": {
+    "name": "YOUR NAME"
+  },
+  "nav": {
+    "about": "About",
+    "projects": "Projects",
+    "experience": "Experience",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "SOFTWARE ENGINEER",
+    "subtitle": "Full-Stack Web Developer",
+    "tagline": "Building futuristic web experiences with React, Next.js, and robust backends.",
+    "viewWork": "View My Work",
+    "contactMe": "Contact Me",
+    "profileAlt": "Cyberpunk style portrait",
+    "imageLabel": "Processing..."
+  },
+  "about": {
+    "title": "ABOUT ME",
+    "whoAmI": {
+      "title": "Who I Am",
+      "p1": "I am a Full-Stack Developer passionate about creating high-performance, aesthetically pleasing, and scalable applications. My focus is on delivering clean code and exceptional user experience.",
+      "p2": "I thrive in dynamic environments and am constantly seeking new technologies and challenges to grow my skills and deliver cutting-edge solutions.",
+      "p3": "This is a placeholder for a third paragraph of your bio."
+    },
+    "downloadCV": "Download CV",
+    "technicalSkills": {
+      "title": "Technical Skills"
+    }
+  },
+  "skills": {
+    "react": "React/Next.js",
+    "typescript": "TypeScript",
+    "nodejs": "Node.js/Express",
+    "redux": "Redux Toolkit",
+    "mongodb": "MongoDB",
+    "tailwind": "Tailwind CSS",
+    "graphql": "GraphQL",
+    "docker": "Docker"
+  },
+  "projects": {
+    "title": "FEATURED PROJECTS",
+    "project_1_id": {
+      "title": "Project Alpha: AI Platform",
+      "description": "A complex platform utilizing Next.js for SSR and integrating various AI services via a Node.js API gateway. Includes secure user authentication and payment processing."
+    },
+    "project_2_id": {
+      "title": "Project Beta: E-commerce Site",
+      "description": "A scalable e-commerce solution built with React and Redux, featuring real-time inventory updates and robust search functionality powered by MongoDB."
+    }
+  },
+  "experience": {
+    "title": "WORK EXPERIENCE & TIMELINE",
+    "exp_1_id": {
+      "title": "Senior Frontend Developer",
+      "company": "Tech Corp, Inc.",
+      "description": "Led the development of a major migration project from AngularJS to React, resulting in a 40% performance boost in load times."
+    },
+    "exp_2_id": {
+      "title": "Full Stack Engineer",
+      "company": "Startup X",
+      "description": "Designed and implemented RESTful APIs using Express.js and managed MongoDB databases for several key features."
+    }
+  },
+  "contact": {
+    "title": "ENGAGE & CONNECT",
+    "form": {
+      "nameLabel": "Your Name / Alias",
+      "namePlaceholder": "Enter your name or alias",
+      "emailLabel": "Encrypted Email Address",
+      "emailPlaceholder": "example@domain.com",
+      "messageLabel": "Your Message / Protocol",
+      "messagePlaceholder": "How can I help you hack the system?",
+      "submitButton": "Transmit Message"
+    },
+    "socialConnect": "Connect on the Cyber Grid"
+  },
+  "footer": {
+    "designedBy": "Designed by",
+    "designerName": "AI / Human Hybrid",
+    "builtWith": "· Built with React & Tailwind",
+    "copyright": "© 2025 All Rights Reserved. Cyber Rights Reserved."
+  }
+}
