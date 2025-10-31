@@ -1,4 +1,3 @@
-import React from 'react';
 import { Experience } from '../store/types';
 
 // 1. تعريف تايب Experience أو استيراده (إذا كان في ملف خارجي)

@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'motion/react';
 import { Send, Github, Linkedin, Mail } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
@@ -95,7 +94,7 @@ export function Contact() {
               </p>
               <div className="flex justify-center gap-4">
                 <a
-                  href="https://github.com"
+                  href="https://github.com/agheadof"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-3 border-2 border-[var(--accent-cyan)] text-[var(--accent-cyan)] rounded-lg hover:bg-[var(--accent-cyan)] hover:text-[var(--bg-primary)] transition-all duration-300 shadow-[0_0_10px_rgba(43,243,248,0.3)] hover:shadow-[0_0_20px_rgba(43,243,248,0.6)]"
@@ -103,7 +102,7 @@ export function Contact() {
                   <Github className="w-6 h-6" />
                 </a>
                 <a
-                  href="https://linkedin.com"
+                  href="https://www.linkedin.com/in/aghyad-fanous-29874b38b/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-3 border-2 border-[var(--accent-cyan)] text-[var(--accent-cyan)] rounded-lg hover:bg-[var(--accent-cyan)] hover:text-[var(--bg-primary)] transition-all duration-300 shadow-[0_0_10px_rgba(43,243,248,0.3)] hover:shadow-[0_0_20px_rgba(43,243,248,0.6)]"
@@ -111,7 +110,7 @@ export function Contact() {
                   <Linkedin className="w-6 h-6" />
                 </a>
                 <a
-                  href="mailto:your.email@example.com"
+                  href="mailto:aghyad.fanous.work@gmail.com"
                   className="p-3 border-2 border-[var(--accent-cyan)] text-[var(--accent-cyan)] rounded-lg hover:bg-[var(--accent-cyan)] hover:text-[var(--bg-primary)] transition-all duration-300 shadow-[0_0_10px_rgba(43,243,248,0.3)] hover:shadow-[0_0_20px_rgba(43,243,248,0.6)]"
                 >
                   <Mail className="w-6 h-6" />
