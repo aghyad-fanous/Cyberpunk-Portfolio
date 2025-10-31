@@ -12,8 +12,6 @@ import { Switch } from '../components/ui/switch';
 // Static Data (From CV)
 // ============================
 const aboutData = {
-  name: 'Aghyad Fanous',
-  title: 'Front-End & Full-Stack Web Developer',
   bio: [
     `I am a passionate Front-End Developer with a strong foundation in modern web technologies. I specialize in creating clean, responsive, and user-friendly interfaces using React, TypeScript, and Tailwind CSS.`,
     `My experience spans both freelance and agency projects, including full-stack development with Node.js, Express.js, and MongoDB. I enjoy building scalable, maintainable applications and continuously improving my technical and creative skills.`,
