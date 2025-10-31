@@ -21,7 +21,7 @@ const staticProjects = [
     description:
       'A full real estate web platform developed from scratch using React, TailwindCSS, Redux Toolkit, and Firebase Realtime Database. It integrates both front-end and back-end features into one cohesive system. Key features include multilingual support (Arabic / English), light & dark modes, user authentication via email, property submission and management, image upload and approval workflow, and an admin dashboard to manage users, listings, and messages. Built with a focus on clean UI, scalability, and real-time interaction between users and admins.',
     tech: [
-      'React.js',
+      'React',
       'Tailwind CSS',
       'Redux Toolkit',
       'Firebase Realtime Database',
@@ -35,7 +35,7 @@ const staticProjects = [
     title: 'Estatein — Real Estate Dashboard',
     description:
       'An admin dashboard built to manage the “Estate in” real estate platform. Developed using React, TailwindCSS, and Redux Toolkit, it provides an organized interface for overseeing users, listings, and general platform operations. The project focuses on clear UI layout, smooth state management, and responsive design for better admin workflow.\n\nDemo credentials:\n👤 Email: sales@estatein.com\n🔑 Password: sale123',
-    tech: ['React.js', 'Tailwind CSS', 'Redux Toolkit'],
+    tech: ['React', 'Tailwind CSS', 'Redux Toolkit'],
     image: '/assets/projects/Es-dash.webp', // أضف مسار الصورة لاحقاً
     liveUrl: 'https://estatein-dashboard-fawn.vercel.app/', // أضف الرابط لاحقاً إذا متاح
     codeUrl: 'https://github.com/aghyad-fanous/Estatein-Dashboard.git', // أضف رابط الكود إذا متاح
@@ -45,7 +45,7 @@ const staticProjects = [
     title: 'The Blog — Modern Blog UI',
     description:
       'A modern, responsive blog interface built with React, Redux Toolkit, and TailwindCSS. The project includes light & dark mode, dynamic state management, and a clean accessible layout. It focuses on improving UI architecture, reusable components, and theme handling, serving as a solid front-end–only showcase for component-driven design.',
-    tech: ['React.js', 'Tailwind CSS', 'Redux Toolkit'],
+    tech: ['React', 'Tailwind CSS', 'Redux Toolkit'],
     image: '/assets/projects/the-blog.webp', // أضف مسار الصورة لاحقاً
     liveUrl: 'https://agheadof.github.io/The-Blog/',
     codeUrl: 'https://github.com/agheadof/The-Blog.git', // أضف رابط الكود إذا متاح
@@ -95,7 +95,7 @@ export function Projects() {
           {t('projects.title')} 
         </motion.h2>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid lg:grid-cols-2 gap-8">
           {projects.map((project, index) => ( 
             <motion.div
               key={project.id} 

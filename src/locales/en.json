@@ -73,7 +73,10 @@
       "emailPlaceholder": "example@domain.com",
       "messageLabel": "Your Message / Protocol",
       "messagePlaceholder": "How can I help you hack the system?",
-      "submitButton": "Transmit Message"
+      "submitButton": "Transmit Message",
+      "sending": "Transmitting...",
+      "successMessage": "Message transmitted successfully! I'll decode and respond ASAP.",
+      "errorMessage": "Transmission failed. Please check your connection and try again."
     },
     "socialConnect": "Connect on the Cyber Grid"
   },

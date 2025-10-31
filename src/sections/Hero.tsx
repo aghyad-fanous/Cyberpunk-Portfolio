@@ -96,7 +96,7 @@ export function Hero() {
                 style={{ width: '420px', height: '420px' }}
               >
                 <img
-                  src="https://i.ibb.co/Sw6fbqFt/Untitled.png"
+                  src="/assets/Profile.webp"
                   alt={t('hero.profileAlt')} 
                   className="w-full h-full object-cover"
                 />

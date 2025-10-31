@@ -14,6 +14,7 @@ import { Contact } from './sections/Contact';
 
 // الخلفية تبقى هنا
 import { CyberBackground } from './components/CyberBackground'; 
+import {CyberpunkBackToTop} from './components/ui/BackToTopButton';
 
 export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -38,6 +39,7 @@ export default function App() {
     <div className="bg-[var(--bg-primary)] text-white min-h-screen overflow-x-hidden">
       {/* CYBERPUNK CIRCUIT BOARD BACKGROUND */}
       <CyberBackground />
+      <CyberpunkBackToTop/>
 
       {/* Content wrapper */}
       <div className="relative z-10">
@@ -68,6 +70,7 @@ export default function App() {
 
         {/* FOOTER */}
         <Footer /> 
+
       </div>
     </div>
   );

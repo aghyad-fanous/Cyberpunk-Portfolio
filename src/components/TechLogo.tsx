@@ -96,11 +96,6 @@ export function TechLogo({ name, color }: TechLogoProps) {
       >
         {name}
       </span>
-      
-      {/* Placeholder label */}
-      <span className="cyber-caption text-[10px] text-gray-600 text-center">
-        [Logo Placeholder]
-      </span>
     </div>
   );
 }

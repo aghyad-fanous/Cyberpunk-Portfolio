@@ -5,6 +5,7 @@ import uiReducer from './slices/uiSlice';
 import projectsReducer from './slices/projectsSlice';
 import experienceReducer from './slices/experienceSlice';
 import articlesReducer from './slices/articlesSlice';
+import contactReducer from './slices/contactSlice';
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     projects: projectsReducer,
     experience: experienceReducer,
     articles: articlesReducer,
+    contact: contactReducer,
   }
 });
 
