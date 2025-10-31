@@ -1,63 +1,121 @@
 import React, { useEffect } from 'react';
 import { motion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
-import type { RootState } from '../store';
-import { useAppDispatch } from '../store'; 
-import { fetchExperiences } from '../store/slices/experienceSlice'; 
+// قم بتعليق أو حذف استخدامات Redux مؤقتاً
+// import { useSelector } from 'react-redux';
+// import type { RootState } from '../store';
+// import { useAppDispatch } from '../store'; 
+// import { fetchExperiences } from '../store/slices/experienceSlice'; 
 import { TimelineItem } from '../components/TimelineItem';
 
+// ============================
+// Static Data (From CV)
+// ============================
+const staticExperiences = [
+  {
+    id: 'focalx-developer', 
+    title: 'Web Application Developer',
+    company: 'Focal x agency',
+    duration: '01/04/2025 - 01/08/2025',
+    location: 'Homs, Syria',
+    url: 'https://focal-x.com/',
+    description: [
+      'Participated in advanced React.js training with practical application.',
+      'Developed responsive web interfaces using React, TypeScript, Bootstrap, and Tailwind CSS.',
+      'Worked on real-world projects using React Router, state management, and Vite.',
+      'Applied clean code practices, reusable components, and responsive design techniques.',
+      'Collaborated with UI/UX designs and implemented pixel-perfect layouts.',
+      'Gained experience with Git version control and project structure optimization.',
+    ],
+  },
+  {
+    id: 'freelance-developer',
+    title: 'Web Application Developer',
+    company: 'Freelance',
+    duration: '01/08/2022 - 01/02/2025',
+    location: 'Online',
+    url: '', 
+    description: [
+      'Built and deployed full-stack web applications using React.js, Node.js, and MongoDB.',
+      'Designed user interfaces with responsive design and Tailwind CSS.',
+      'Developed REST APIs and handled authentication logic.',
+      'Managed code with GitHub and used clean coding practices.',
+      'Collaborated directly with clients to define technical requirements.',
+    ],
+  },
+  {
+    id: 'chabban-manager',
+    title: 'Web Content Manager',
+    company: 'Chabban Group',
+    duration: '06/06/2020 - 01/04/2021',
+    location: 'Dubai, United Arab Emirates',
+    url: '',
+    description: [
+      'Developed and maintained a WordPress landing page for a UAE company.',
+      'Created separate pages for multiple subsidiaries, detailing company information, projects, and photo galleries.',
+      'Ensured responsive design and easy navigation for an enhanced user experience.',
+      'Managed content updates and basic SEO optimizations.',
+    ],
+  },
+];
+
+
 export function Experience() {
-  const { t } = useTranslation();
-  // جلب البيانات واستخدام الـ dispatch في القسم الخاص بها
-  const experiences = useSelector((s: RootState) => s.experience.experiences); 
-  const dispatch = useAppDispatch();
+  const { t } = useTranslation();
+  
+  // ⚠️  استبدال جلب البيانات من Redux بالبيانات الثابتة
+  const experiences = staticExperiences;
 
-  useEffect(() => {
-    dispatch(fetchExperiences());
-  }, [dispatch]);
+  // ⚠️ تعطيل الـ useEffect الذي يجلب البيانات الديناميكية
+  /*
+  useEffect(() => {
+    dispatch(fetchExperiences());
+  }, [dispatch]);
+  */
 
-  return (
-    <section className="py-20 px-6 lg:px-8" id="experience">
-      <div className="max-w-5xl mx-auto">
-        <motion.h2
-          className="cyber-h2 text-center mb-16"
-          style={{
-            color: 'var(--accent-cyan)',
-            textShadow: '0 0 20px var(--accent-cyan)',
-          }}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          {t('experience.title')} 
-        </motion.h2>
+  return (
+    <section className="py-20 px-6 lg:px-8" id="experience">
+      <div className="max-w-5xl mx-auto">
+        <motion.h2
+          className="cyber-h2 text-center mb-16"
+          style={{
+            color: 'var(--accent-cyan)',
+            textShadow: '0 0 20px var(--accent-cyan)',
+          }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          {t('experience.title')} 
+        </motion.h2>
 
-        {/* Vertical Timeline Line */}
-        <div className="relative">
-          <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-[var(--accent-cyan)] via-[var(--accent-red)] to-[var(--accent-cyan)] opacity-40 max-md:left-3"></div>
+        {/* Vertical Timeline Line */}
+        <div className="relative">
+          <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-[var(--accent-cyan)] via-[var(--accent-red)] to-[var(--accent-cyan)] opacity-40 max-md:left-3"></div>
 
-          {experiences.map((exp, index) => (
-            <motion.div
-              key={exp.id} 
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-            >
-              <TimelineItem 
-                {...exp} 
-                // نمرر البيانات المترجمة كـ props
-                title={t(`experience.${exp.id}.title`)} 
-                company={t(`experience.${exp.id}.company`)} 
-                description={t(`experience.${exp.id}.description`)} 
-                isLeft={index % 2 === 0} // تبديل الجانب
-              /> 
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
+          {/* ⚠️ نستخدم الآن البيانات الثابتة مباشرة. ملاحظة: يجب إزالة الترجمة مؤقتاً إذا لم تكن البيانات الثابتة باللغة الإنجليزية */}
+          {experiences.map((exp, index) => (
+            <motion.div
+              key={exp.id} 
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+            >
+              <TimelineItem 
+                // نمرر البيانات الثابتة مباشرة
+                {...exp} 
+                // ⚠️ تم حذف الترجمة المؤقتة لأننا نستخدم النصوص الإنجليزية مباشرة من الكائن
+                title={exp.title}
+                company={exp.company}
+                description={exp.description} 
+                isLeft={index % 2 === 0} // تبديل الجانب
+              /> 
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }
