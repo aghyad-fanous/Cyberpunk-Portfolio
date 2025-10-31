@@ -3,11 +3,7 @@ import { motion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
 // يجب استيراد TimelineItem
 import { TimelineItem } from '../components/TimelineItem';
-import { }
-// ============================
-// Static Data (From CV) - STRICT Type adherence
-// ============================
-// يُفترض أن Experience Type مستورد، لذا لا يتم تعريفه هنا.
+
 const staticExperiences = [
   {
     id: 'focalx-developer', 
