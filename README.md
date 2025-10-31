@@ -1,7 +1,5 @@
 
-  # Cyberpunk Portfolio
-
-  This is a code bundle for Cyberpunk Portfolio. The original project is available at https://www.figma.com/design/ixaLTjsTdJ3k3fG6T9ELKU/Cyberpunk-Portfolio.
+  # Cyberpunk Portfolio 
 
   ## Running the code
 
