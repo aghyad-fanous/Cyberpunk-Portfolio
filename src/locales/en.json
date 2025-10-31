@@ -1,6 +1,6 @@
 {
   "header": {
-    "name": "YOUR NAME"
+    "name": "AGHYAD FANOUS"
   },
   "nav": {
     "about": "About",
@@ -15,7 +15,7 @@
     "viewWork": "View My Work",
     "contactMe": "Contact Me",
     "profileAlt": "Cyberpunk style portrait",
-    "imageLabel": "Processing..."
+    "imageLabel": "Coding..."
   },
   "about": {
     "title": "ABOUT ME",
@@ -79,7 +79,7 @@
   },
   "footer": {
     "designedBy": "Designed by",
-    "designerName": "AI / Human Hybrid",
+    "designerName": "AGHYAD FANOUS",
     "builtWith": "· Built with React & Tailwind",
     "copyright": "© 2025 All Rights Reserved. Cyber Rights Reserved."
   }
