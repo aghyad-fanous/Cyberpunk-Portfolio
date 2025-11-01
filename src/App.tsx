@@ -13,7 +13,6 @@ import { Experience } from './sections/Experience';
 import { Contact } from './sections/Contact';
 
 // الخلفية تبقى هنا
-import { CyberBackground } from './components/CyberBackground'; 
 import BackToTopButton from './components/ui/BackToTopButton';
 
 export default function App() {
@@ -38,7 +37,7 @@ export default function App() {
   return (
     <div className="bg-[var(--bg-primary)] text-white min-h-screen overflow-x-hidden">
       {/* CYBERPUNK CIRCUIT BOARD BACKGROUND */}
-      <CyberBackground />
+      
       <BackToTopButton/>
 
       {/* Content wrapper */}

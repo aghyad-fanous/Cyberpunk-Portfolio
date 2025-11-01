@@ -1,0 +1,78 @@
+/* Background Animations */
+@keyframes breathe {
+  0%, 100% { transform: scale(1.05); opacity: 1; }
+  50% { transform: scale(1.03); opacity: 0.95; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0%, 0%); }
+  50% { transform: translate(5%, 5%); }
+}
+
+@keyframes scanLine {
+  from { transform: translateX(100%); }
+  to { transform: translateX(-100%); }
+}
+
+/* Circuit Data Point Animations */
+@keyframes dataPoint1 {
+  0% { transform: translate(0px, 20px); }
+  33% { transform: translate(60px, 20px); }
+  66% { transform: translate(60px, 60px); }
+  100% { transform: translate(100px, 60px); }
+}
+
+@keyframes dataPoint2 {
+  0% { transform: translate(200px, 80px); }
+  33% { transform: translate(140px, 80px); }
+  66% { transform: translate(140px, 120px); }
+  100% { transform: translate(100px, 120px); }
+}
+
+@keyframes dataPoint3 {
+  0% { transform: translate(120px, 0px); }
+  50% { transform: translate(120px, 40px); }
+  100% { transform: translate(160px, 40px); }
+}
+
+@keyframes dataPoint4 {
+  0% { transform: translate(80px, 200px); }
+  50% { transform: translate(80px, 160px); }
+  100% { transform: translate(40px, 160px); }
+}
+
+@keyframes dataPoint5 {
+  0% { transform: translate(0px, 100px); }
+  50% { transform: translate(40px, 100px); }
+  100% { transform: translate(40px, 140px); }
+}
+
+/* Animation Classes */
+.animate-breathe {
+  animation: breathe 30s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 60s linear infinite;
+}
+
+.animate-scan-line {
+  animation: scanLine var(--duration) linear infinite;
+}
+
+/* Data Point Animation Classes */
+.data-point-1 { animation: dataPoint1 4s linear infinite; }
+.data-point-2 { animation: dataPoint2 5s linear infinite; }
+.data-point-3 { animation: dataPoint3 3s linear infinite; }
+.data-point-4 { animation: dataPoint4 3.5s linear infinite; }
+.data-point-5 { animation: dataPoint5 4.5s linear infinite; }
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-breathe,
+  .animate-float,
+  .animate-scan-line,
+  [class*="data-point-"] {
+    animation: none;
+  }
+}
