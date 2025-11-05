@@ -1,8 +1,10 @@
-"use client";
+// ❌ تم إزالة السطر "use client";
 
 import * as React from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react@0.487.0";
-import { DayPicker } from "react-day-picker@8.10.1";
+// ❌ تم إزالة رقم الإصدار @0.487.0
+import { ChevronLeft, ChevronRight } from "lucide-react"; 
+// ❌ تم إزالة رقم الإصدار @8.10.1
+import { DayPicker } from "react-day-picker";
 
 import { cn } from "./utils";
 import { buttonVariants } from "./button";

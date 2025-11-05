@@ -1,8 +1,7 @@
-"use client";
 
 import * as React from "react";
-import * as AccordionPrimitive from "@radix-ui/react-accordion@1.2.3";
-import { ChevronDownIcon } from "lucide-react@0.487.0";
+import * as AccordionPrimitive from "@radix-ui/react-accordion";
+import { ChevronDownIcon } from "lucide-react"; // يفضل إزالة رقم الإصدار من هنا أيضاً
 
 import { cn } from "./utils";
 
@@ -29,6 +28,7 @@ function AccordionTrigger({
   className,
   children,
   ...props
+// ✅ تصحيح: تم تغيير AccordionPrimitive.AccordionTrigger إلى Trigger
 }: React.ComponentProps<typeof AccordionPrimitive.Trigger>) {
   return (
     <AccordionPrimitive.Header className="flex">
@@ -51,6 +51,7 @@ function AccordionContent({
   className,
   children,
   ...props
+// ✅ تصحيح: تم تغيير AccordionPrimitive.AccordionContent إلى Content
 }: React.ComponentProps<typeof AccordionPrimitive.Content>) {
   return (
     <AccordionPrimitive.Content

@@ -66,9 +66,8 @@ export const Experience = () => {
         </motion.h2>
 
         <div className="relative">
-          <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-[var(--accent-cyan)] via-[var(--accent-red)] to-[var(--accent-cyan)] opacity-40 max-md:left-3"></div>
+          <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-linear-to-b from-(--accent-cyan) via-(--accent-magenta) to-(--accent-cyan) opacity-40 max-md:left-3"></div>
 
-          {/* 🌀 أنيميشن واحد خفيف للكونتينر بدل كل عنصر */}
             {experiences.map((exp, index) => (
           <motion.div
             initial={{ opacity: 0, y: 40 }}

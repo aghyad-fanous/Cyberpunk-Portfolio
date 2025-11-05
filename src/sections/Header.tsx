@@ -34,7 +34,7 @@ export function Header({ mobileMenuOpen, setMobileMenuOpen }: HeaderProps) {
 
     <motion.header
 
-      className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-[rgba(0,4,19,0.8)] border-b-2 border-[var(--accent-cyan)]/30"
+      className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-[rgba(0,4,19,0.8)] border-b-2 border-(--accent-cyan)/30"
 
       initial={{ y: -100 }}
 
@@ -46,7 +46,7 @@ export function Header({ mobileMenuOpen, setMobileMenuOpen }: HeaderProps) {
 
       <nav className="max-w-7xl mx-auto px-6 lg:px-8 py-4 flex items-center justify-between">
 
-  <div className="cyber-h2 text-2xl text-[var(--accent-cyan)] tracking-wide">
+  <div className="cyber-h2 text-2xl text-(--accent-cyan) tracking-wide">
 
           <Code className="inline-block w-6 h-6 mr-2" />
 
@@ -72,7 +72,7 @@ export function Header({ mobileMenuOpen, setMobileMenuOpen }: HeaderProps) {
 
               href={`#${id}`}
 
-              className="cyber-body text-sm text-gray-300 hover:text-[var(--accent-cyan)] transition-colors uppercase tracking-wide"
+              className="cyber-body text-sm text-gray-300 hover:text-(--accent-cyan) transition-colors uppercase tracking-wide"
 
             >
 
@@ -90,7 +90,7 @@ export function Header({ mobileMenuOpen, setMobileMenuOpen }: HeaderProps) {
 
         <button
 
-          className="md:hidden text-[var(--accent-cyan)]"
+          className="md:hidden text-(--accent-cyan)"
 
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
 
@@ -110,7 +110,7 @@ export function Header({ mobileMenuOpen, setMobileMenuOpen }: HeaderProps) {
 
         <motion.div
 
-          className="md:hidden backdrop-blur-lg bg-[rgba(0,4,19,0.95)] border-t-2 border-[var(--accent-cyan)]/30 overflow-hidden"
+          className="md:hidden backdrop-blur-lg bg-[rgba(0,4,19,0.95)] border-t-2 border-(--accent-cyan)/30 overflow-hidden"
 
           style={{ transformOrigin: 'top' }}
 
@@ -134,7 +134,7 @@ export function Header({ mobileMenuOpen, setMobileMenuOpen }: HeaderProps) {
 
                 href={`#${id}`}
 
-                className="cyber-body text-sm text-gray-300 hover:text-[var(--accent-cyan)] transition-colors uppercase tracking-wide"
+                className="cyber-body text-sm text-gray-300 hover:text-(--accent-cyan) transition-colors uppercase tracking-wide"
 
                 onClick={() => setMobileMenuOpen(false)}
 

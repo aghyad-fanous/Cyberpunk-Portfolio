@@ -22,7 +22,7 @@ export const CircuitTracesDynamic = () => {
     let width = canvas.width = window.innerWidth;
     let height = canvas.height = window.innerHeight;
 
-    const colors = ['#00ffff', '#ff0000']; // CYAN, RED
+    const colors = ['#2bf3f8', '#ad2b2e','#f0f']; // CYAN, RED
     const points: TracePoint[] = [];
     const paths: { x: number; y: number }[][] = [];
 
@@ -77,7 +77,7 @@ export const CircuitTracesDynamic = () => {
           path,
           progress: 0,
           trailProgress: 0,
-          speed: 0.04 + Math.random() * 0.04, // زيادة السرعة
+          speed: 0.02 + Math.random() * 0.02, // زيادة السرعة
           color: colors[Math.floor(Math.random() * colors.length)],
           size: 3,
           alive: true,
@@ -93,8 +93,8 @@ export const CircuitTracesDynamic = () => {
     document.addEventListener('visibilitychange', handleVisibilityChange);
 
     // دفعات مختلفة
-    let fastInterval = setInterval(() => { if(isVisible) spawnPointsBatch(2); }, 300);
-    let slowInterval = setInterval(() => { if(isVisible) spawnPointsBatch(4); }, 700);
+    let fastInterval = setInterval(() => { if(isVisible) spawnPointsBatch(1); }, 1850);
+    let slowInterval = setInterval(() => { if(isVisible) spawnPointsBatch(2); }, 350);
 
     const draw = () => {
       if (!ctx) return;
@@ -171,7 +171,7 @@ export const CircuitTracesDynamic = () => {
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 w-full h-full z-2 pointer-events-none">
+    <div className="fixed top-0 left-0 w-full h-full z-0 pointer-events-none">
   {/* Canvas الخلفية */}
   <canvas ref={canvasRef} className="w-full h-full" />
 

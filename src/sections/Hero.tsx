@@ -74,7 +74,7 @@ export const Hero = () => {
               <div className="relative hero-portrait">
                 {/* Neon Ring (مخفف العدد إلى حلقة واحدة فقط) */}
                 <m.div
-                  className="absolute inset-0 rounded-full border-2 border-[var(--accent-cyan)]"
+                  className="absolute inset-0 rounded-full border-2 border-(--accent-cyan)"
                   style={{
                     width: '420px',
                     height: '420px',
@@ -89,7 +89,7 @@ export const Hero = () => {
 
                 {/* Portrait */}
                 <div
-                  className="relative rounded-full overflow-hidden border-4 border-[var(--accent-cyan)] shadow-[0_0_40px_rgba(43,243,248,0.6)]"
+                  className="relative rounded-full overflow-hidden border-4 border-(--accent-cyan) shadow-[0_0_40px_rgba(43,243,248,0.6)]"
                   style={{ width: '420px', height: '420px' }}
                 >
                   <img
@@ -98,12 +98,12 @@ export const Hero = () => {
                     loading="lazy"
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--accent-cyan)]/20 to-transparent"></div>
+                  <div className="absolute inset-0 bg-linear-to-t from-(--accent-cyan)/20 to-transparent"></div>
                 </div>
 
                 {/* Label */}
                 <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
-                  <p className="cyber-caption text-[var(--accent-cyan)] text-center opacity-70">
+                  <p className="cyber-caption text-(--accent-cyan) text-center opacity-70">
                     {t('hero.imageLabel')}
                   </p>
                 </div>

@@ -1,13 +1,20 @@
-// src/api/client.ts
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:4000';
+const API_BASE = import.meta.env.VITE_API_URL || 'https://portfolio-backend-two-inky.vercel.app';
 
 const jsonHeaders = { 'Content-Type': 'application/json' };
+
+const handleResponse = async (res: Response) => {
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    const msg = data?.message || `Request failed with status ${res.status}`;
+    throw new Error(msg);
+  }
+  return data;
+};
 
 export const api = {
   get: async (path: string) => {
     const res = await fetch(`${API_BASE}${path}`, { credentials: 'include' });
-    if (!res.ok) throw new Error(`GET ${path} failed: ${res.status}`);
-    return res.json();
+    return handleResponse(res);
   },
 
   post: async (path: string, body: any) => {
@@ -17,8 +24,7 @@ export const api = {
       headers: jsonHeaders,
       body: JSON.stringify(body),
     });
-    if (!res.ok) throw new Error(`POST ${path} failed: ${res.status}`);
-    return res.json();
+    return handleResponse(res);
   },
 
   put: async (path: string, body: any) => {
@@ -28,8 +34,7 @@ export const api = {
       headers: jsonHeaders,
       body: JSON.stringify(body),
     });
-    if (!res.ok) throw new Error(`PUT ${path} failed: ${res.status}`);
-    return res.json();
+    return handleResponse(res);
   },
 
   del: async (path: string) => {
@@ -37,7 +42,6 @@ export const api = {
       method: 'DELETE',
       credentials: 'include',
     });
-    if (!res.ok) throw new Error(`DELETE ${path} failed: ${res.status}`);
-    return res.json();
+    return handleResponse(res);
   },
 };

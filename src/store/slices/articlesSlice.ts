@@ -1,121 +1,131 @@
-// src/store/slices/articlesSlice.ts
-import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
-import type { Article } from '../types';
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { api } from '../../api/client';
+import { Article } from '../types';
 
-type Filter = {
-  search: string;
-  tag?: string | null;
-  locale?: 'en' | 'ar' | null;
-  publishedOnly?: boolean;
-};
 
-type ArticlesState = {
+
+interface ArticlesState {
   articles: Article[];
-  status: 'idle' | 'loading' | 'failed';
-  error?: string | null;
-  filter: Filter;
-};
+  selectedArticle: Article | null;
+  loading: boolean;
+  error: string | null;
+}
 
 const initialState: ArticlesState = {
   articles: [],
-  status: 'idle',
+  selectedArticle: null,
+  loading: false,
   error: null,
-  filter: {
-    search: '',
-    tag: null,
-    locale: null,
-    publishedOnly: true,
-  },
 };
 
+// ============================
+// Async Thunks
+// ============================
+
+// Get all blogs
 export const fetchArticles = createAsyncThunk<Article[], void>(
   'articles/fetch',
   async () => {
-    const data = await api.get('/api/articles');
+    const data = await api.get('/api/blogs');
     return data as Article[];
   }
 );
 
-export const createArticle = createAsyncThunk<Article, Partial<Article>>(
-  'articles/create',
-  async (payload) => {
-    const data = await api.post('/api/articles', payload);
+// Get single blog by slug
+export const fetchArticleBySlug = createAsyncThunk<Article, string>(
+  'articles/fetchBySlug',
+  async (slug) => {
+    const data = await api.get(`/api/blogs/${slug}`);
     return data as Article;
   }
 );
 
+// Create new blog (admin only)
+export const createArticle = createAsyncThunk<Article, Partial<Article>>(
+  'articles/create',
+  async (payload) => {
+    const data = await api.post('/api/blogs/create', payload);
+    return data as Article;
+  }
+);
+
+// Update blog
 export const updateArticle = createAsyncThunk<
   Article,
   { id: string; payload: Partial<Article> }
 >('articles/update', async ({ id, payload }) => {
-  const data = await api.put(`/api/articles/${id}`, payload);
+  const data = await api.put(`/api/blogs/${id}`, payload);
   return data as Article;
 });
 
-export const articlesSlice = createSlice({
+// Delete blog
+export const deleteArticle = createAsyncThunk<string, string>(
+  'articles/delete',
+  async (id) => {
+    await api.del(`/api/blogs/${id}`);
+    return id;
+  }
+);
+
+// ============================
+// Slice
+// ============================
+
+const articlesSlice = createSlice({
   name: 'articles',
   initialState,
   reducers: {
-    setSearch: (state, action: PayloadAction<string>) => {
-      state.filter.search = action.payload;
-    },
-    setTag: (state, action: PayloadAction<string | null>) => {
-      state.filter.tag = action.payload;
-    },
-    setLocaleFilter: (state, action: PayloadAction<'en' | 'ar' | null>) => {
-      state.filter.locale = action.payload;
-    },
-    setPublishedOnly: (state, action: PayloadAction<boolean>) => {
-      state.filter.publishedOnly = action.payload;
-    },
-    clearFilters: (state) => {
-      state.filter = { search: '', tag: null, locale: null, publishedOnly: true };
+    clearSelectedArticle: (state) => {
+      state.selectedArticle = null;
     },
   },
-  extraReducers: (builder) =>
+  extraReducers: (builder) => {
     builder
+      // ========== Fetch all ==========
       .addCase(fetchArticles.pending, (state) => {
-        state.status = 'loading';
+        state.loading = true;
+        state.error = null;
       })
-      .addCase(fetchArticles.fulfilled, (state, action) => {
-        state.status = 'idle';
+      .addCase(fetchArticles.fulfilled, (state, action: PayloadAction<Article[]>) => {
+        state.loading = false;
         state.articles = action.payload;
       })
       .addCase(fetchArticles.rejected, (state, action) => {
-        state.status = 'failed';
-        state.error = action.error.message ?? 'Failed to fetch articles';
+        state.loading = false;
+        state.error = action.error.message || 'Failed to fetch articles';
       })
-      .addCase(createArticle.fulfilled, (state, action) => {
+
+      // ========== Fetch by slug ==========
+      .addCase(fetchArticleBySlug.fulfilled, (state, action: PayloadAction<Article>) => {
+        state.selectedArticle = action.payload;
+      })
+
+      // ========== Create ==========
+      .addCase(createArticle.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(createArticle.fulfilled, (state, action: PayloadAction<Article>) => {
+        state.loading = false;
         state.articles.unshift(action.payload);
       })
-      .addCase(updateArticle.fulfilled, (state, action) => {
-        const idx = state.articles.findIndex((a) => a._id === action.payload._id);
+      .addCase(createArticle.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || 'Failed to create article';
+      })
+
+      // ========== Update ==========
+      .addCase(updateArticle.fulfilled, (state, action: PayloadAction<Article>) => {
+        const idx = state.articles.findIndex((a) => a.id === action.payload.id);
         if (idx >= 0) state.articles[idx] = action.payload;
-      }),
+      })
+
+      // ========== Delete ==========
+      .addCase(deleteArticle.fulfilled, (state, action: PayloadAction<string>) => {
+        state.articles = state.articles.filter((a) => a.id !== action.payload);
+      });
+  },
 });
 
-export const {
-  setSearch,
-  setTag,
-  setLocaleFilter,
-  setPublishedOnly,
-  clearFilters,
-} = articlesSlice.actions;
-
-export const selectFilteredArticles = (state: { articles: ArticlesState }) => {
-  const { articles, filter } = state.articles;
-  const search = filter.search.trim().toLowerCase();
-
-  return articles.filter((a) => {
-    if (filter.publishedOnly && !a.published) return false;
-    if (filter.locale && a.locale && filter.locale !== a.locale) return false;
-    if (filter.tag && (!a.tags || !a.tags.includes(filter.tag))) return false;
-    if (!search) return true;
-    const inTitle = a.title?.toLowerCase().includes(search);
-    const inExcerpt = a.excerpt?.toLowerCase().includes(search);
-    return Boolean(inTitle || inExcerpt);
-  });
-};
-
+export const { clearSelectedArticle } = articlesSlice.actions;
 export default articlesSlice.reducer;

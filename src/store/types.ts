@@ -1,29 +1,30 @@
 // src/store/types.ts
 export type Language = 'en' | 'ar';
 
-export type Article = {
-  _id: string;
-  slug: string;
+export interface Article {
+  id: string;
   title: string;
-  excerpt?: string;
-  content?: string;
-  authorId?: string;
-  tags?: string[];
-  locale?: Language;
-  published?: boolean;
-  publishedAt?: string;
-  createdAt?: string;
-  updatedAt?: string;
-};
+  slug: string;
+  content: string;
+  thumbnail?: string | null;
+  category: string;
+  authorId: string;
+  createdAt: string;
+  updatedAt: string;
+}
 
+// src/types.ts
 export type Project = {
   id: string;
   title: string;
-  description?: string;
-  tech?: string[];
+  description: string;
+  tags: string[]; // من Prisma schema
   image?: string;
   liveUrl?: string;
   codeUrl?: string;
+  createdAt?: string;
+  updatedAt?: string;
+  ownerId?: string;
 };
 
 export type Experience = {

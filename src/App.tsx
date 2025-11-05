@@ -12,10 +12,6 @@ import { Projects } from './sections/Projects';
 import { Experience } from './sections/Experience';
 import { Contact } from './sections/Contact';
 
-// الخلفية تبقى هنا
-import BackToTopButton from './components/ui/BackToTopButton';
-import {    CircuitTracesDynamic } from './components/CyberBackground';
-
 export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(true); // يمكن نقلها لاحقاً لـ Redux لتعميمها
@@ -38,8 +34,7 @@ export default function App() {
   return (
     <div className="bg-[var(--bg-primary)] text-white min-h-screen overflow-x-hidden">
       {/* CYBERPUNK CIRCUIT BOARD BACKGROUND */}
-      <CircuitTracesDynamic/>
-      <BackToTopButton/>
+ 
 
       {/* Content wrapper */}
       <div className="relative z-10">
