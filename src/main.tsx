@@ -16,14 +16,14 @@ import BackToTopButton from "./components/ui/BackToTopButton"
 createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <Provider store={store}>
-           <CircuitTracesDynamic/>
-      <BackToTopButton/>
+      <CircuitTracesDynamic />
+      <BackToTopButton />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<App />} />
           {/* <Route path="/admin" element={<AdminPage />} />
           <Route path="/login" element={<LoginPage />} /> */}
-           <Route path="/dashboard" element={<DashboardLayout />}>
+          <Route path="/dashboard" element={<DashboardLayout />}>
             <Route index element={<Navigate to="projects" replace />} />
             <Route path="projects" element={<ProjectsPage />} />
             <Route path="articles" element={<ArticlesPage />} />

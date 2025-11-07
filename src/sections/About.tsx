@@ -71,7 +71,6 @@ export const About: React.FC<AboutProps> = ({ darkMode, setDarkMode }) => {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, ease: 'easeOut' }}
               viewport={{ once: true, amount: 0.2 }}
-              style={{ willChange: 'opacity, transform' }}
             >
               <GlassCard glowColor="red">
                 <h3 className="cyber-h2 text-white mb-4 text-[28px]">

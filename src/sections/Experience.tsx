@@ -74,7 +74,6 @@ export const Experience = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: prefersReducedMotion ? 0 : 0.4, ease: 'easeOut' }}
-            style={{ willChange: 'transform, opacity' }}
           >
               <MemoizedTimelineItem key={exp.id} {...exp} isLeft={index % 2 === 0} />
           </motion.div>

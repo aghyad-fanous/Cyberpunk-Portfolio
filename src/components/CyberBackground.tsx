@@ -94,7 +94,7 @@ export const CircuitTracesDynamic = () => {
 
     // دفعات مختلفة
     let fastInterval = setInterval(() => { if(isVisible) spawnPointsBatch(1); }, 1850);
-    let slowInterval = setInterval(() => { if(isVisible) spawnPointsBatch(2); }, 350);
+    let slowInterval = setInterval(() => { if(isVisible) spawnPointsBatch(2); }, 700);
 
     const draw = () => {
       if (!ctx) return;
@@ -116,9 +116,9 @@ export const CircuitTracesDynamic = () => {
 
         // رسم Trace خلف النقطة
         ctx.strokeStyle = point.color;
-        ctx.globalAlpha = 0.3;
+        ctx.globalAlpha = 0.9;
         ctx.lineWidth = point.size;
-        ctx.shadowBlur = 5;
+        ctx.shadowBlur = 1;
         ctx.shadowColor = point.color;
 
         ctx.beginPath();
@@ -175,8 +175,6 @@ export const CircuitTracesDynamic = () => {
   {/* Canvas الخلفية */}
   <canvas ref={canvasRef} className="w-full h-full" />
 
-  {/* طبقة الـ glass blur */}
-  <div className="absolute top-0 left-0 w-full h-full backdrop-blur-sm  pointer-events-none"></div>
 </div>
 
   )

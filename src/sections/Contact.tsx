@@ -76,7 +76,6 @@ const ContactComponent = () => {
             duration: prefersReducedMotion ? 0 : 0.35,
             ease: "easeOut",
           }}
-          style={{ willChange: "transform, opacity" }}
         >
           <GlassCard>
             <form onSubmit={handleSubmit} className="space-y-6">
