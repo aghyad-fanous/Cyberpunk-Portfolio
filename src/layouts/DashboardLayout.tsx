@@ -10,13 +10,14 @@ export const DashboardLayout = () => {
   const activeTabValue = pathSegments[pathSegments.length - 1];
 
   const tabs = [
+    { to: "experience", label: "Experience" },
     { to: "projects", label: "Projects" },
     { to: "articles", label: "Blog" },
     { to: "newsletter", label: "Newsletter" },
   ];
 
   return (
-    <section className="min-h-screen bg-[rgba(0,31,63,0.1)] px-6 py-10">
+    <section className="min-h-screen text-white bg-[rgba(0,31,63,0.1)] px-6 py-10">
       <GlassCard className="max-w-5xl mx-auto p-6">
         
         <Tabs value={activeTabValue} className="mb-10">

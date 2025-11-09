@@ -1,47 +1,53 @@
-const API_BASE = import.meta.env.VITE_API_URL || 'https://portfolio-backend-two-inky.vercel.app';
+// ملف: api.ts
 
-const jsonHeaders = { 'Content-Type': 'application/json' };
+import axios, { AxiosResponse, AxiosRequestConfig } from "axios"
 
-const handleResponse = async (res: Response) => {
-  const data = await res.json().catch(() => ({}));
-  if (!res.ok) {
-    const msg = data?.message || `Request failed with status ${res.status}`;
-    throw new Error(msg);
-  }
-  return data;
-};
+// 1. تحديد قاعدة URL للـ API
+const API_BASE = "https://portfolio-backend-two-inky.vercel.app"
+
+// 2. إنشاء مثيل (Instance) لـ Axios
+const apiInstance = axios.create({
+  baseURL: API_BASE,
+  // لطلب الكوكيز مع الطلب (إرسال الكوكيز تلقائياً من المتصفح)
+  withCredentials: true,
+  // إعداد افتراضي لهيدر Content-Type لطلبات POST/PUT
+  headers: {
+    "Content-Type": "application/json",
+  },
+})
+
+// ملاحظة هامة: تم إزالة Interceptor قراءة التوكن.
+// يتم الآن إرسال الكوكي "httpOnly" تلقائياً مع الطلبات بواسطة المتصفح.
+
+// 3. دالة مساعدة لمعالجة استجابات Axios
+const handleAxiosResponse = <T>(response: AxiosResponse<T>): T => {
+  return response.data
+}
+
+// 4. تعريف هيكل الـ api بنفس أسماء الدوال (get, post, put, del)
 
 export const api = {
-  get: async (path: string) => {
-    const res = await fetch(`${API_BASE}${path}`, { credentials: 'include' });
-    return handleResponse(res);
+  // دالة GET
+  get: async <T>(path: string): Promise<T> => {
+    const response = await apiInstance.get<T>(path)
+    return handleAxiosResponse(response)
   },
 
-  post: async (path: string, body: any) => {
-    const res = await fetch(`${API_BASE}${path}`, {
-      method: 'POST',
-      credentials: 'include',
-      headers: jsonHeaders,
-      body: JSON.stringify(body),
-    });
-    return handleResponse(res);
+  // دالة POST
+  post: async <T>(path: string, body: any): Promise<T> => {
+    const response = await apiInstance.post<T>(path, body)
+    return handleAxiosResponse(response)
   },
 
-  put: async (path: string, body: any) => {
-    const res = await fetch(`${API_BASE}${path}`, {
-      method: 'PUT',
-      credentials: 'include',
-      headers: jsonHeaders,
-      body: JSON.stringify(body),
-    });
-    return handleResponse(res);
+  // دالة PUT
+  put: async <T>(path: string, body: any): Promise<T> => {
+    const response = await apiInstance.put<T>(path, body)
+    return handleAxiosResponse(response)
   },
 
-  del: async (path: string) => {
-    const res = await fetch(`${API_BASE}${path}`, {
-      method: 'DELETE',
-      credentials: 'include',
-    });
-    return handleResponse(res);
+  // دالة DELETE
+  del: async <T>(path: string): Promise<T> => {
+    const response = await apiInstance.delete<T>(path)
+    return handleAxiosResponse(response)
   },
-};
+}
