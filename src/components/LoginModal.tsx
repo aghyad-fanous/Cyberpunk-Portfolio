@@ -6,8 +6,10 @@ import { fetchCurrentUser, loginUser, logoutUser } from "../store/slices/authSli
 import { RootState } from "../store";
 import {GlassCard} from "../components/GlassCard";
 import {CyberButton} from "../components/CyberButton";
+import { useNavigate } from "react-router-dom";
 
 export const LoginModal = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user, status } = useSelector((s: RootState) => s.authSlice);
   const [open, setOpen] = useState(false);
@@ -18,6 +20,7 @@ export const LoginModal = () => {
     e.preventDefault();
     await dispatch(loginUser({ email, password }) as any);
     setOpen(false);
+    navigate("/dashboard/projects");
   };
 
   const handleLogout = () => {
