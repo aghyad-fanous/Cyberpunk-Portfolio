@@ -2,7 +2,7 @@ import React from "react"
 import { createRoot } from "react-dom/client"
 import { Provider } from "react-redux"
 import { store } from "./store"
-import { HashRouter, Routes, Route, Navigate } from "react-router-dom"
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import App from "./App"
 import "./index.css"
 import "./i18n"
@@ -18,7 +18,7 @@ createRoot(document.getElementById("root")!).render(
     <Provider store={store}>
       <CircuitTracesDynamic />
       <BackToTopButton />
-      <HashRouter>
+      <BrowserRouter>
         <Routes>
           <Route path="/" element={<App />} />
           {/* <Route path="/admin" element={<AdminPage />} />
@@ -30,7 +30,7 @@ createRoot(document.getElementById("root")!).render(
             <Route path="newsletter" element={<NewsletterPage />} />
           </Route>
         </Routes>
-      </HashRouter>
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>
 )
