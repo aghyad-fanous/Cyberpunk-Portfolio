@@ -1,27 +1,26 @@
-import { Experience } from "../store/types"
-import { GlassCard } from "./GlassCard"
+import { Edit2, Trash2 } from "lucide-react";
+import { Experience, Language } from "../store/types"; // تأكد من المسار الصحيح
+import { GlassCard } from "./GlassCard";
 
-// 1. تعريف تايب Experience أو استيراده (إذا كان في ملف خارجي)
-// **يفضل استيراد هذا التايب من ملف الـ slice أو types الأصلي في مشروعك**
-export type Language = "en" | "ar" // افتراض تايب اللغة
-
-// تعريف تايب الخصائص للمكون TimelineItem
-// يدمج تايب Experience مع خاصية isLeft المطلوبة للتصميم
+// إضافة خصائص الإدارة (onEdit, onDelete)
 interface TimelineItemProps extends Experience {
-  isLeft?: boolean
+  isLeft?: boolean;
+  onEdit?: () => void; // وظيفة لفتح نموذج التعديل
+  onDelete?: () => void; // وظيفة الحذف
 }
 
 export function TimelineItem({
-  // استخدام الخصائص من تايب Experience، مع قيم افتراضية للحقول الاختيارية
   title,
   company = "",
   description = "",
   from = "",
-  to = null, // يُفترض أن 'to' يمكن أن تكون null للخبرة الحالية
+  to = null,
   isLeft = false,
+  onEdit, // تم الإضافة
+  onDelete, // تم الإضافة
 }: TimelineItemProps) {
-  // دمج حقلي from و to لإنشاء سلسلة 'year' المستخدمة في التصميم
-  const yearString = `${from} - ${to === null ? "Current" : to}`
+  const yearString = `${from} - ${to === null ? "Current" : to}`;
+  const showActions = !!onEdit && !!onDelete; // لتحديد ما إذا كنا في وضع الإدارة
 
   return (
     <div
@@ -36,8 +35,28 @@ export function TimelineItem({
         } max-md:text-left`}
       >
         <GlassCard>
+          {showActions && (
+            <div
+              className={`flex gap-2 mb-2 ${
+                isLeft ? "justify-start" : "justify-end"
+              }`}
+            >
+              <button
+                onClick={onEdit}
+                className="p-1 rounded border border-(--accent-cyan) hover:bg-[rgba(43,243,248,0.1)] transition-colors duration-200"
+              >
+                <Edit2 className="w-4 h-4 text-(--accent-cyan)" />
+              </button>
+              <button
+                onClick={onDelete}
+                className="p-1 rounded border border-red-500 hover:bg-[rgba(239,68,68,0.1)] transition-colors duration-200"
+              >
+                <Trash2 className="w-4 h-4 text-red-400" />
+              </button>
+            </div>
+          )}
+
           <div className="cyber-caption text-(--accent-cyan) mb-2 uppercase tracking-wider">
-            {/* استخدام yearString المدمج */}
             {yearString}
           </div>
           <h4 className="cyber-h2 text-white mb-1" style={{ fontSize: "20px" }}>
@@ -55,7 +74,7 @@ export function TimelineItem({
         </GlassCard>
       </div>
 
-      {/* Timeline Marker */}
+      {/* Timeline Marker (بقي كما هو) */}
       <div className="relative shrink-0">
         <div
           className={`w-6 h-6 rounded-full border-4 border-(--bg-primary) ${
@@ -66,8 +85,8 @@ export function TimelineItem({
         ></div>
       </div>
 
-      {/* Spacer for alignment */}
+      {/* Spacer for alignment (بقي كما هو) */}
       <div className="flex-1 max-md:hidden"></div>
     </div>
-  )
+  );
 }

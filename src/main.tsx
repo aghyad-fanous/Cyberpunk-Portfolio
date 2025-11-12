@@ -14,6 +14,7 @@ import { CircuitTracesDynamic } from "./components/CyberBackground"
 import BackToTopButton from "./components/ui/BackToTopButton"
 import ArticlePage from "./pages/ArticlesViewerPage"
 import Home from "./pages/Home"
+import { ExperiencesPage } from "./pages/dashboard/ExperiencesPage"
 
 createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -26,6 +27,7 @@ createRoot(document.getElementById("root")!).render(
           <Route path="" element={<Home />} />
           <Route path="/dashboard" element={<DashboardLayout />}>
             <Route index element={<Navigate to="projects" replace />} />
+            <Route path="experience" element={<ExperiencesPage />} />
             <Route path="projects" element={<ProjectsPage />} />
             <Route path="articles" element={<ArticlesPage />} />
             <Route path="newsletter" element={<NewsletterPage />} />
