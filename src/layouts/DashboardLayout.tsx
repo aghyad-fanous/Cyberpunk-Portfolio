@@ -1,10 +1,19 @@
 // src/pages/dashboard/DashboardLayout.tsx
-import { NavLink, Outlet, useLocation } from "react-router-dom"
+import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom"
 import { GlassCard } from "../components/GlassCard"
 import { Tabs, TabsList, TabsTrigger } from "../components/ui/tabs";
+import { useEffect } from "react";
 
 export const DashboardLayout = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const userExists = localStorage.getItem("authToken");
+
+   useEffect(() => {
+    if (!userExists ) {
+      navigate("/");
+    }
+  }, [])
 
   const pathSegments = location.pathname.split('/');
   const activeTabValue = pathSegments[pathSegments.length - 1];
@@ -17,7 +26,7 @@ export const DashboardLayout = () => {
   ];
 
   return (
-    <section className="min-h-screen text-white bg-[rgba(0,31,63,0.1)] px-6 py-10">
+    <section className="min-h-screen text-white bg-[rgba(0,31,63,0.1)] px-6 py-10 mt-20">
       <GlassCard className="max-w-5xl mx-auto p-6">
         
         <Tabs value={activeTabValue} className="mb-10">

@@ -1,15 +1,29 @@
-import { useEffect, useMemo, useState } from 'react'
-import { motion, useReducedMotion } from 'motion/react'
-import { Edit2, Trash2, Plus } from 'lucide-react'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState, AppDispatch } from '../../store'
-import { fetchArticles, createArticle, updateArticle, deleteArticle } from '../../store/slices/articlesSlice'
-import { GlassCard } from '../../components/GlassCard'
-import { CyberButton } from '../../components/CyberButton'
-import { Input } from '../../components/ui/input'
-import { Textarea } from '../../components/ui/textarea'
-import { api } from '../../api/client'
-import { memo } from 'react'
+import { useEffect, useMemo, useState, memo } from "react"
+import { motion, useReducedMotion } from "motion/react"
+import { Edit2, Trash2, Plus } from "lucide-react"
+import { useDispatch, useSelector } from "react-redux"
+import { RootState, AppDispatch } from "../../store"
+import {
+  fetchArticles,
+  createArticle,
+  updateArticle,
+  deleteArticle,
+} from "../../store/slices/articlesSlice"
+import { GlassCard } from "../../components/GlassCard"
+import { CyberButton } from "../../components/CyberButton"
+import { Input } from "../../components/ui/input"
+import { Textarea } from "../../components/ui/textarea"
+import { useImageUpload } from "../../hooks/useImageUpload"
+import ArticleCard from "../../components/ArticlePreviewCard"
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+  DialogDescription,
+} from "../../components/ui/dialog"
 
 type ArticleForm = {
   title: string
@@ -23,18 +37,25 @@ export const ArticlesPage = memo(() => {
   const dispatch = useDispatch<AppDispatch>()
   const prefersReducedMotion = useReducedMotion()
 
-  const { articles, loading, error } = useSelector((s: RootState) => s.articles)
-  const [isModalOpen, setModalOpen] = useState(false)
+  const { articles, loading } = useSelector((s: RootState) => s.articles)
   const [editing, setEditing] = useState<{ id?: string } | null>(null)
   const [form, setForm] = useState<ArticleForm>({
-    title: '',
-    slug: '',
-    content: '',
-    thumbnail: '',
-    category: '',
+    title: "",
+    slug: "",
+    content: "",
+    thumbnail: "",
+    category: "",
   })
   const [localError, setLocalError] = useState<string | null>(null)
   const [busy, setBusy] = useState(false)
+  const [open, setOpen] = useState(false)
+
+  const {
+    uploadImage,
+    uploading,
+    error: uploadError,
+    imageUrl,
+  } = useImageUpload()
 
   useEffect(() => {
     dispatch(fetchArticles())
@@ -42,9 +63,9 @@ export const ArticlesPage = memo(() => {
 
   const openCreate = () => {
     setEditing(null)
-    setForm({ title: '', slug: '', content: '', thumbnail: '', category: '' })
+    setForm({ title: "", slug: "", content: "", thumbnail: "", category: "" })
     setLocalError(null)
-    setModalOpen(true)
+    setOpen(true)
   }
 
   const openEdit = (article: any) => {
@@ -53,23 +74,23 @@ export const ArticlesPage = memo(() => {
       title: article.title,
       slug: article.slug,
       content: article.content,
-      thumbnail: article.thumbnail ?? '',
-      category: article.category ?? '',
+      thumbnail: article.thumbnail ?? "",
+      category: article.category ?? "",
     })
     setLocalError(null)
-    setModalOpen(true)
+    setOpen(true)
   }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value })
-  }
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => setForm({ ...form, [e.target.name]: e.target.value })
 
   const handleSubmit = async (e?: React.FormEvent) => {
     e?.preventDefault()
     setLocalError(null)
 
     if (!form.title || !form.slug || !form.content || !form.category) {
-      setLocalError('Please fill required fields.')
+      setLocalError("Please fill all required fields.")
       return
     }
 
@@ -80,21 +101,28 @@ export const ArticlesPage = memo(() => {
       } else {
         await dispatch(createArticle(form)).unwrap()
       }
-      setModalOpen(false)
+      setOpen(false)
     } catch (err: any) {
-      setLocalError(err?.message || 'Operation failed')
+      setLocalError(err?.message || "Operation failed")
     } finally {
       setBusy(false)
     }
   }
 
   const handleDelete = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this article?')) return
+    if (!confirm("Are you sure you want to delete this article?")) return
     try {
       await dispatch(deleteArticle(id)).unwrap()
     } catch (err: any) {
-      alert(err?.message || 'Delete failed')
+      alert(err?.message || "Delete failed")
     }
+  }
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+    const result = await uploadImage(file)
+    if (result?.url) setForm({ ...form, thumbnail: result.url })
   }
 
   const cards = useMemo(() => articles || [], [articles])
@@ -108,89 +136,137 @@ export const ArticlesPage = memo(() => {
         className="max-w-6xl mx-auto"
       >
         <div className="flex items-center justify-between mb-6">
-          <h1 className="cyber-h2 text-accent-cyan">Articles</h1>
-          <CyberButton onClick={openCreate} variant="primary" className="flex items-center gap-3">
-            <Plus className="w-4 h-4" /> New Article
-          </CyberButton>
-        </div>
+          <h1 className="cyber-h2 text-(--accent-cyan)">Articles</h1>
+          <Dialog open={open} onOpenChange={setOpen}>
+            <DialogTrigger asChild>
+              <CyberButton
+                onClick={openCreate}
+                variant="primary"
+                className="flex items-center gap-3"
+              >
+                <Plus className="w-4 h-4" /> New Article
+              </CyberButton>
+            </DialogTrigger>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {cards.map((a) => (
-            <GlassCard key={a.id}>
-              <div className="flex justify-between items-start gap-4">
-                <div>
-                  <h3 className="text-xl font-semibold text-white">{a.title}</h3>
-                  <p className="text-sm text-gray-300 mt-2 line-clamp-3">{a.content}</p>
-                  <p className="mt-3 text-xs text-gray-400">Category: {a.category}</p>
-                  <p className="mt-1 text-xs text-gray-500">By: {a.authorId}</p>
-                </div>
+            <DialogContent className="bg-[rgba(0,4,19,0.85)] border-2 border-(--accent-cyan) shadow-[0_0_20px_rgba(43,243,248,0.3)] text-white">
+              
+              <DialogHeader>
+                <DialogTitle>
+                  {editing ? "Edit Article" : "Create Article"}
+                </DialogTitle>
+                <DialogDescription>
+                  Fill in the fields to {editing ? "update" : "create"} your article
+                </DialogDescription>
+              </DialogHeader>
 
-                <div className="flex flex-col gap-2">
-                  <button onClick={() => openEdit(a)} className="p-2 rounded border border-accent-cyan">
-                    <Edit2 className="w-4 h-4 text-accent-cyan" />
-                  </button>
-                  <button onClick={() => handleDelete(a.id)} className="p-2 rounded border border-red-500">
-                    <Trash2 className="w-4 h-4 text-red-400" />
-                  </button>
-                </div>
-              </div>
-            </GlassCard>
-          ))}
-        </div>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <Input type="hidden" name="id" value={editing?.id || ""} />
 
-        {/* Modal */}
-        {isModalOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-            <div className="absolute inset-0 bg-black/60" onClick={() => setModalOpen(false)} />
-            <motion.div
-              initial={{ opacity: 0, y: 20, scale: 0.98 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: prefersReducedMotion ? 0 : 0.2 }}
-              className="relative z-10 w-full max-w-2xl"
-            >
-              <GlassCard>
-                <form onSubmit={(e) => handleSubmit(e)} className="space-y-4">
-                  <Input type="hidden" name="id" value={editing?.id || ''} />
                   <div>
-                    <label className="cyber-caption text-accent-cyan block mb-2">Title</label>
-                    <Input name="title" value={form.title} onChange={handleChange} />
+                    <label className="cyber-caption text-(--accent-cyan) block mb-2">
+                      Title
+                    </label>
+                    <Input
+                      name="title"
+                      value={form.title}
+                      onChange={handleChange}
+                    />
                   </div>
 
                   <div>
-                    <label className="cyber-caption text-accent-cyan block mb-2">Slug</label>
-                    <Input name="slug" value={form.slug} onChange={handleChange} />
+                    <label className="cyber-caption text-(--accent-cyan) block mb-2">
+                      Slug
+                    </label>
+                    <Input
+                      name="slug"
+                      value={form.slug}
+                      onChange={handleChange}
+                    />
                   </div>
 
                   <div>
-                    <label className="cyber-caption text-accent-cyan block mb-2">Category</label>
-                    <Input name="category" value={form.category} onChange={handleChange} />
+                    <label className="cyber-caption text-(--accent-cyan) block mb-2">
+                      Category
+                    </label>
+                    <Input
+                      name="category"
+                      value={form.category}
+                      onChange={handleChange}
+                    />
                   </div>
 
                   <div>
-                    <label className="cyber-caption text-accent-cyan block mb-2">Thumbnail URL</label>
-                    <Input name="thumbnail" value={form.thumbnail} onChange={handleChange} />
+                    <label className="cyber-caption text-(--accent-cyan) block mb-2">
+                      Image (WebP only)
+                    </label>
+                    <input
+                      type="file"
+                      accept="image/webp"
+                      onChange={handleFileChange}
+                      className="block w-full text-sm text-gray-300 file:mr-3 file:py-2 file:px-4 
+                        file:rounded-md file:border-0 file:text-sm file:font-semibold 
+                        file:bg-(--accent-cyan)/20 file:text-(--accent-cyan) 
+                        hover:file:bg-(--accent-cyan)/30"
+                    />
+                    {uploading && (
+                      <p className="text-cyan-400 text-sm mt-2">Uploading...</p>
+                    )}
+                    {uploadError && (
+                      <p className="text-red-400 text-sm mt-2">{uploadError}</p>
+                    )}
+                    {(imageUrl || form.thumbnail) && (
+                      <div className="mt-3">
+                        <img
+                          src={imageUrl || form.thumbnail}
+                          alt="Uploaded preview"
+                          className="max-h-40 rounded-lg border border-cyan-500/50"
+                        />
+                      </div>
+                    )}
                   </div>
 
                   <div>
-                    <label className="cyber-caption text-accent-cyan block mb-2">Content</label>
-                    <Textarea name="content" value={form.content} onChange={handleChange} rows={8} />
+                    <label className="cyber-caption text-(--accent-cyan) block mb-2">
+                      Content
+                    </label>
+                    <Textarea
+                      name="content"
+                      value={form.content}
+                      onChange={handleChange}
+                      rows={8}
+                    />
                   </div>
 
                   {localError && <p className="text-red-400">{localError}</p>}
 
-                  <div className="flex gap-3">
-                    <CyberButton type="submit" variant="primary" disabled={busy}>
-                      {editing ? 'Update' : 'Create'}
+                  <DialogFooter className="mt-4">
+                    <CyberButton
+                      type="submit"
+                      variant="primary"
+                      disabled={busy}
+                    >
+                      {editing ? "Update" : "Create"}
                     </CyberButton>
-                    <CyberButton type="button" variant="outline" onClick={() => setModalOpen(false)}>
+                    <CyberButton
+                      type="button"
+                      variant="outline"
+                      onClick={() => setOpen(false)}
+                    >
                       Cancel
                     </CyberButton>
-                  </div>
+                  </DialogFooter>
                 </form>
-              </GlassCard>
-            </motion.div>
-          </div>
-        )}
+              
+            </DialogContent>
+          </Dialog>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {loading && <p className="text-gray-400">Loading articles...</p>}
+          {cards.map((a) => (
+            <ArticleCard key={a.id} article={a} />
+          ))}
+        </div>
       </motion.div>
     </section>
   )

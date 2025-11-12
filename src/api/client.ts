@@ -12,6 +12,7 @@ const TOKEN_KEY = "authToken"
 export const setAuthToken = (token: string | null) => {
   if (token) {
     localStorage.setItem(TOKEN_KEY, token)
+
   } else {
     localStorage.removeItem(TOKEN_KEY)
   }
@@ -26,7 +27,7 @@ export const getAuthToken = (): string | null => {
 // 1. تحديد قاعدة URL للـ API
 // ----------------------------------------------------
 
-const API_BASE = "https://portfolio-backend-two-inky.vercel.app"
+const API_BASE = import.meta.env.VITE_API_URL || "https://portfolio-backend-two-inky.vercel.app"
 
 // ----------------------------------------------------
 // 2. إنشاء مثيل (Instance) لـ Axios

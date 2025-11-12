@@ -6,21 +6,26 @@ import { Code, Menu, X } from "lucide-react"
 
 import { useTranslation } from "react-i18next"
 
-import { useSelector } from "react-redux"
-
-import type { RootState } from "../store"
 import { LoginModal } from "../components/LoginModal"
+import { Link, NavLink } from "react-router-dom"
+import { useAppSelector } from "../store/hook"
 
 interface HeaderProps {
+  links: string[]
   mobileMenuOpen: boolean
-
+  isNav: boolean
   setMobileMenuOpen: (open: boolean) => void
 }
 
-export function Header({ mobileMenuOpen, setMobileMenuOpen }: HeaderProps) {
+export function Header({
+  mobileMenuOpen,
+  setMobileMenuOpen,
+  links,
+  isNav,
+}: HeaderProps) {
   const { t } = useTranslation()
 
-  const language = useSelector((s: RootState) => s.ui.language) // استخدام اللغة من الـ store
+  const language = useAppSelector((s) => s.ui.language)
 
   return (
     <motion.header
@@ -35,23 +40,30 @@ export function Header({ mobileMenuOpen, setMobileMenuOpen }: HeaderProps) {
 
           {t("header.name")}
 
-          {/* عرض اللغة الحالية */}
-
           <span className="text-sm text-gray-400 ml-2">({language})</span>
         </div>
 
         {/* Desktop Navigation */}
 
         <div className="hidden md:flex items-center gap-8">
-          {["about", "projects", "experience", "contact"].map((id) => (
-            <a
-              key={id}
-              href={`#${id}`}
+          {isNav ? (
+            <Link
+              to={"/"}
               className="cyber-body text-sm text-gray-300 hover:text-(--accent-cyan) transition-colors uppercase tracking-wide"
             >
-              {t(`nav.${id}`)}
-            </a>
-          ))}
+              Home
+            </Link>
+          ) : (
+            links.map((link, idx) => (
+              <a
+                key={idx}
+                href={`#${link}`}
+                className="cyber-body text-sm text-gray-300 hover:text-(--accent-cyan) transition-colors uppercase tracking-wide"
+              >
+                {link}
+              </a>
+            ))
+          )}
           <LoginModal />
         </div>
 

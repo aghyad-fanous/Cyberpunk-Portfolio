@@ -1,33 +1,20 @@
 {
   "compilerOptions": {
-    /* أساسيات المشروع */
-    "target": "es2020", // يستهدف إصدار JavaScript حديث
-    "module": "esnext", // يستخدم نظام الوحدات الحديث
-    "lib": ["dom", "dom.iterable", "esnext"], // يتضمن المكتبات القياسية للمتصفحات
-
-    /* إعدادات React/JSX */
-    "jsx": "react-jsx", // ✨ الأهم لحل مشكلة JSX ✨
-    "allowJs": true, // يسمح بتضمين ملفات JavaScript عادية (إذا كان لديك ملفات .js)
-    "skipLibCheck": true, // يتخطى فحص الأنواع للمكتبات (مثل Radix UI) لتسريع عملية البناء وتجنب أخطاء الأنواع غير الضرورية
-
-    /* إعدادات تمنع الأخطاء الشائعة */
+    "target": "es2020",
+    "module": "esnext",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "jsx": "react-jsx",
+    "allowJs": true,
+    "skipLibCheck": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "strict": true, // تفعيل جميع قواعد التحقق من النوع الصارمة
-    
-    /* كيفية حل الوحدات (Modules) */
-    "moduleResolution": "node", // يستخدم استراتيجية حل الوحدات الخاصة بـ Node
+    "strict": true,
+    "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": true, // يتطلب تهيئة TypeScript بشكل جيد
-    
-    /* إعدادات إخراج الملفات (Build) */
-    "outDir": "./dist", // المجلد الذي يتم فيه تجميع الكود (Compile)
-    "noEmit": true // لا يخرج (Emit) أي ملفات JavaScript لأننا نستخدم عادةً حزمة بناء مثل Webpack/Vite/Next
+    "isolatedModules": true,
+    "outDir": "./dist",
+    "noEmit": true
   },
-  "include": [
-    "src/**/*" // المجلدات التي يجب أن يفحصها TypeScript
-  ],
-  "exclude": [
-    "node_modules" // يستثني مجلد التبعيات
-  ]
+  "include": ["src", "global.d.ts"],
+  "exclude": ["node_modules"]
 }

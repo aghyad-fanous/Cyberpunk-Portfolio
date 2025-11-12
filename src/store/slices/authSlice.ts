@@ -3,6 +3,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 // 💡 استيراد دوال مساعدة التوكن الجديدة
 import { api, setAuthToken, getAuthToken } from "../../api/client" 
+import { get } from "http"
 // لم تعد هناك حاجة لـ ResponseType
 // import { ResponseType } from "axios" 
 
@@ -54,8 +55,7 @@ export const loginUser = createAsyncThunk<
     const data = await api.post("/api/auth/login", credentials) as AuthResponse 
     
     // 💡 حفظ التوكن في Local Storage
-    setAuthToken(data.token) 
-    console.log('data', data)
+    setAuthToken(data.token)
     
     return data.user as User
   } catch (err: any) {

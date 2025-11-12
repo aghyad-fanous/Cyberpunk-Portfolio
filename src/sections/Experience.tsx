@@ -70,6 +70,7 @@ export const Experience = () => {
 
             {experiences.map((exp, index) => (
           <motion.div
+          key={index}
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}

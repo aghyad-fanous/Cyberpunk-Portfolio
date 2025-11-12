@@ -1,6 +1,5 @@
 // src/store/index.ts
 import { configureStore } from '@reduxjs/toolkit';
-import { useDispatch } from 'react-redux';
 import uiReducer from './slices/uiSlice';
 import projectsReducer from './slices/projectsSlice';
 import experienceReducer from './slices/experienceSlice';
@@ -21,4 +20,3 @@ export const store = configureStore({
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
-export const useAppDispatch = () => useDispatch<AppDispatch>();

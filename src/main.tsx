@@ -12,6 +12,8 @@ import { ArticlesPage } from "./pages/dashboard/ArticlesPage"
 import { NewsletterPage } from "./pages/dashboard/NewsletterPage"
 import { CircuitTracesDynamic } from "./components/CyberBackground"
 import BackToTopButton from "./components/ui/BackToTopButton"
+import ArticlePage from "./pages/ArticlesViewerPage"
+import Home from "./pages/Home"
 
 createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -20,15 +22,16 @@ createRoot(document.getElementById("root")!).render(
       <BackToTopButton />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<App />} />
-          {/* <Route path="/admin" element={<AdminPage />} />
-          <Route path="/login" element={<LoginPage />} /> */}
+          <Route path="/" element={<App />} >
+          <Route path="" element={<Home />} />
           <Route path="/dashboard" element={<DashboardLayout />}>
             <Route index element={<Navigate to="projects" replace />} />
             <Route path="projects" element={<ProjectsPage />} />
             <Route path="articles" element={<ArticlesPage />} />
             <Route path="newsletter" element={<NewsletterPage />} />
           </Route>
+          <Route path="/articles/:slug" element={<ArticlePage />} />
+        </Route>
         </Routes>
       </BrowserRouter>
     </Provider>

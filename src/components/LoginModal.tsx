@@ -7,6 +7,7 @@ import { RootState } from "../store";
 import {GlassCard} from "../components/GlassCard";
 import {CyberButton} from "../components/CyberButton";
 import { useNavigate } from "react-router-dom";
+import { LogOut } from "lucide-react";
 
 export const LoginModal = () => {
   const navigate = useNavigate();
@@ -15,6 +16,10 @@ export const LoginModal = () => {
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+     useEffect(() => {
+    dispatch(fetchCurrentUser() as any);
+  }, [dispatch])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,22 +30,16 @@ export const LoginModal = () => {
 
   const handleLogout = () => {
     dispatch(logoutUser() as any);
+    navigate('/')
   };
 
-  if (user) {
-    return (
-      <CyberButton onClick={handleLogout}>
-        Logout
-      </CyberButton>
-    );
-  }
 
-    useEffect(() => {
-    dispatch(fetchCurrentUser() as any);
-  }, [dispatch])
+
+ 
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <>
+    {user == null ? ( <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <CyberButton>Login</CyberButton>
       </DialogTrigger>
@@ -79,6 +78,17 @@ export const LoginModal = () => {
           </GlassCard>
         </motion.div>
       </DialogContent>
-    </Dialog>
+    </Dialog> ) : (
+      <>
+       <CyberButton onClick={handleLogout} className="flex items-center justify-center gap-3.5">
+        <LogOut/>
+        Logout
+      </CyberButton>
+      <CyberButton onClick={()=>navigate('/dashboard')}>
+        Dashboard
+      </CyberButton>
+      </>
+    )}
+    </>
   );
 };
