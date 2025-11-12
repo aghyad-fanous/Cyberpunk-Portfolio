@@ -73,7 +73,7 @@ export function ProjectCard({
              </div>
           )}
 
-          {hasMoreContent && (
+          {(hasMoreContent && !showActions) && (
             <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
               <DialogTrigger asChild>
                 <button 
