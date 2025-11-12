@@ -34,12 +34,13 @@ export const sendEmail = createAsyncThunk(
       return rejectWithValue('Email service keys are missing.');
     }
     try {
+      console.log('Sending email with the following data:', formData);
       const response = await emailjs.send(
         serviceID,
         templateID,
         {
           to_email: 'aghyad.fanous.work@gmail.com',
-          reply_to: formData.to_email,
+          reply_to: formData.reply_to,
           name: formData.name,
           subject: formData.subject,
           message: formData.message,

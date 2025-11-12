@@ -13,9 +13,9 @@ export default function App() {
   }, [darkMode])
 
   return (
-    <div className="bg-(--bg-primary) text-white min-h-screen overflow-x-hidden">
+    <div className=" text-white min-h-screen overflow-x-hidden ">
       {/* Content wrapper */}
-      <div className="relative z-10">
+      <div className="relative ">
         <Header
           mobileMenuOpen={mobileMenuOpen}
           setMobileMenuOpen={setMobileMenuOpen}

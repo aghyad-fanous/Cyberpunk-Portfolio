@@ -16,7 +16,7 @@ export default function Home() {
   }, [darkMode]);
 
   return (
-    <div className="bg-(--bg-primary) text-white min-h-screen overflow-x-hidden">
+    <div className=" text-white min-h-screen overflow-x-hidden">
  
 
       {/* Content wrapper */}
