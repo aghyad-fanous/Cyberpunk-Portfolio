@@ -44,11 +44,11 @@ export const About: React.FC<AboutProps> = ({ darkMode, setDarkMode }) => {
 
   return (
     <LazyMotion features={domAnimation}>
-      <section id="about" className="py-20 px-6 lg:px-8">
+      <section id="about" className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8">
         <div className="max-w-7xl mx-auto">
           {/* ===== Title ===== */}
           <m.h2
-            className="cyber-h2 text-center mb-12"
+            className="cyber-h2 text-center mb-8 sm:mb-10 md:mb-12 text-2xl sm:text-3xl md:text-4xl"
             style={{
               color: 'var(--accent-cyan)',
               textShadow: '0 0 12px var(--accent-cyan)',
@@ -63,7 +63,7 @@ export const About: React.FC<AboutProps> = ({ darkMode, setDarkMode }) => {
           </m.h2>
 
           {/* ===== Layout ===== */}
-          <div className="grid lg:grid-cols-2 gap-12 items-start">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 md:gap-12 items-start">
             {/* === Left: Bio === */}
             <m.div
               className="about-profile"
@@ -72,21 +72,21 @@ export const About: React.FC<AboutProps> = ({ darkMode, setDarkMode }) => {
               transition={{ duration: 0.6, ease: 'easeOut' }}
               viewport={{ once: true, amount: 0.2 }}
             >
-              <GlassCard glowColor="red">
-                <h3 className="cyber-h2 text-white mb-4 text-[28px]">
+              <GlassCard glowColor="magenta" className="p-4 sm:p-5 md:p-6">
+                <h3 className="cyber-h2 text-white mb-4 text-lg sm:text-xl md:text-2xl">
                   Who Am I?
                 </h3>
 
                 {aboutData.bio.map((p, i) => (
-                  <p key={i} className="cyber-body text-gray-300 mb-4 leading-relaxed">
+                  <p key={i} className="cyber-body text-gray-300 mb-3 sm:mb-4 leading-relaxed text-sm sm:text-base">
                     {p}
                   </p>
                 ))}
 
-                <div className="flex items-center gap-4 mt-6">
-                  <a href={aboutData.cvLink} download>
-                    <CyberButton variant="outline">
-                      <Download className="w-4 h-4" />
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 mt-6">
+                  <a href={aboutData.cvLink} download className="w-full sm:w-auto">
+                    <CyberButton variant="outline" className="w-full sm:w-auto text-xs sm:text-sm">
+                      <Download className="w-3 sm:w-4 h-3 sm:h-4" />
                       Download CV
                     </CyberButton>
                   </a>
@@ -102,12 +102,12 @@ export const About: React.FC<AboutProps> = ({ darkMode, setDarkMode }) => {
               viewport={{ once: true, amount: 0.2 }}
               style={{ willChange: 'opacity, transform' }}
             >
-              <h3 className="cyber-h2 text-white mb-6 text-[28px]">
+              <h3 className="cyber-h2 text-white mb-4 sm:mb-6 text-lg sm:text-xl md:text-2xl">
                 Technical Skills
               </h3>
 
               <m.div
-                className="flex flex-wrap gap-3"
+                className="flex flex-wrap gap-2 sm:gap-3"
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.2 }}

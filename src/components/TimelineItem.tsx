@@ -24,7 +24,7 @@ export function TimelineItem({
 
   return (
     <div
-      className={`flex items-center gap-8 mb-12 ${
+      className={`flex items-center gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-10 md:mb-12 ${
         isLeft ? "flex-row" : "flex-row-reverse"
       } max-md:flex-col max-md:items-start`}
     >
@@ -34,10 +34,10 @@ export function TimelineItem({
           isLeft ? "text-right" : "text-left"
         } max-md:text-left`}
       >
-        <GlassCard>
+        <GlassCard glowColor="magenta">
           {showActions && (
             <div
-              className={`flex gap-2 mb-2 ${
+              className={`flex gap-2 mb-3 ${
                 isLeft ? "justify-start" : "justify-end"
               }`}
             >
@@ -56,19 +56,19 @@ export function TimelineItem({
             </div>
           )}
 
-          <div className="cyber-caption text-(--accent-cyan) mb-2 uppercase tracking-wider">
+          <div className="cyber-caption text-(--accent-cyan) mb-2 uppercase tracking-wider text-xs sm:text-sm">
             {yearString}
           </div>
-          <h4 className="cyber-h2 text-white mb-1" style={{ fontSize: "20px" }}>
+          <h4 className="cyber-h2 text-white mb-1 text-lg sm:text-xl md:text-2xl" style={{ fontSize: 'clamp(18px, 4vw, 20px)' }}>
             {title}
           </h4>
           <div
-            className="cyber-body text-(--accent-magenta) mb-3"
-            style={{ fontSize: "16px" }}
+            className="cyber-body text-(--accent-magenta) mb-3 text-sm sm:text-base"
+            style={{ fontSize: 'clamp(14px, 2vw, 16px)' }}
           >
             {company}
           </div>
-          <p className="cyber-body text-gray-300" style={{ fontSize: "14px" }}>
+          <p className="cyber-body text-gray-300 text-sm sm:text-base" style={{ fontSize: 'clamp(13px, 2vw, 14px)' }}>
             {description}
           </p>
         </GlassCard>

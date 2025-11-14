@@ -171,7 +171,7 @@ export const CircuitTracesDynamic = () => {
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 w-full h-full z-0 pointer-events-none">
+    <div className="hidden md:flex fixed top-0 left-0 w-full h-full z-0 pointer-events-none">
   {/* Canvas الخلفية */}
   <canvas ref={canvasRef} className="w-full h-full" />
 

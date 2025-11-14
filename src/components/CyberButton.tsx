@@ -18,7 +18,7 @@ export const CyberButton = forwardRef<HTMLButtonElement, CyberButtonProps>(
     ...props 
   }, ref) => { // 👈 3. استقبال ref كمعامل ثانٍ
     
-    const baseStyles = "cyber-caption px-6 py-3 rounded-lg uppercase tracking-wider transition-all duration-300 relative overflow-hidden group cursor-pointer";
+    const baseStyles = "cyber-caption px-3 sm:px-5 md:px-6 py-2 sm:py-3 md:py-3 text-xs sm:text-sm md:text-base rounded-lg uppercase tracking-wider transition-all duration-300 relative overflow-hidden group cursor-pointer";
     
     const variantStyles = {
       primary: `

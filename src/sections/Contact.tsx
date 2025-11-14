@@ -46,11 +46,11 @@ const ContactComponent = () => {
   }
 
   return (
-    <section className="py-20 px-6 lg:px-8 bg-[rgba(0,31,63,0.1)]" id="contact">
+    <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8 bg-[rgba(0,31,63,0.1)]" id="contact">
       <div className="max-w-3xl mx-auto">
         {/* 👇 Animation أخف وسلس */}
         <motion.h2
-          className="cyber-h2 text-center mb-12 contact-form"
+          className="cyber-h2 text-center mb-8 sm:mb-10 md:mb-12 contact-form text-2xl sm:text-3xl md:text-4xl"
           style={{
             color: "var(--accent-cyan)",
             textShadow: "0 0 20px var(--accent-cyan)",
@@ -78,9 +78,9 @@ const ContactComponent = () => {
           }}
         >
           <GlassCard>
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5 md:space-y-6">
               <div>
-                <label className="cyber-caption text-(--accent-cyan) block mb-2 uppercase tracking-wider">
+                <label className="cyber-caption text-(--accent-cyan) block mb-2 uppercase tracking-wider text-xs sm:text-sm">
                   {t("contact.form.nameLabel")}
                 </label>
                 <Input
@@ -89,14 +89,14 @@ const ContactComponent = () => {
                   placeholder={t("contact.form.namePlaceholder")}
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full bg-[rgba(0,4,19,0.5)] border-2 border-(--accent-cyan) text-white rounded-lg
+                  className="w-full bg-[rgba(0,4,19,0.5)] border-2 border-(--accent-cyan) text-white rounded-lg text-xs sm:text-sm
                              focus:border-(--accent-cyan) focus:ring-2 focus:ring-(--accent-cyan)/50
                              cyber-body"
                 />
               </div>
 
               <div>
-                <label className="cyber-caption text-(--accent-cyan) block mb-2 uppercase tracking-wider">
+                <label className="cyber-caption text-(--accent-cyan) block mb-2 uppercase tracking-wider text-xs sm:text-sm">
                   {t("contact.form.emailLabel")}
                 </label>
                 <Input
@@ -105,14 +105,14 @@ const ContactComponent = () => {
                   placeholder={t("contact.form.emailPlaceholder")}
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full bg-[rgba(0,4,19,0.5)] border-2 border-(--accent-cyan) text-white rounded-lg
+                  className="w-full bg-[rgba(0,4,19,0.5)] border-2 border-(--accent-cyan) text-white rounded-lg text-xs sm:text-sm
                              focus:border-(--accent-cyan) focus:ring-2 focus:ring-(--accent-cyan)/50
                              cyber-body"
                 />
               </div>
 
               <div>
-                <label className="cyber-caption text-(--accent-cyan) block mb-2 uppercase tracking-wider">
+                <label className="cyber-caption text-(--accent-cyan) block mb-2 uppercase tracking-wider text-xs sm:text-sm">
                   {t("contact.form.messageLabel")}
                 </label>
                 <Textarea
@@ -121,7 +121,7 @@ const ContactComponent = () => {
                   rows={5}
                   value={formData.message}
                   onChange={handleChange}
-                  className="w-full bg-[rgba(0,4,19,0.5)] border-2 border-(--accent-cyan) text-white rounded-lg
+                  className="w-full bg-[rgba(0,4,19,0.5)] border-2 border-(--accent-cyan) text-white rounded-lg text-xs sm:text-sm
                              focus:border-(--accent-cyan) focus:ring-2 focus:ring-(--accent-cyan)/50
                              cyber-body resize-none"
                 />
@@ -130,34 +130,34 @@ const ContactComponent = () => {
               {/* 🧠 استخدم transition CSS بدل motion أثناء hover */}
               <CyberButton
                 variant="primary"
-                className="w-full items-center justify-center flex gap-4 py-4 transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98]"
+                className="w-full items-center justify-center flex gap-2 sm:gap-4 py-3 sm:py-4 transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98] text-xs sm:text-sm md:text-base"
                 type="submit"
                 disabled={loading}
               >
-                <Send className="w-4 h-4" />
+                <Send className="w-3 sm:w-4 h-3 sm:h-4" />
                 {loading
                   ? t("contact.form.sending")
                   : t("contact.form.submitButton")}
               </CyberButton>
 
               {success && (
-                <p className="text-green-400 text-center mt-4">
+                <p className="text-green-400 text-center mt-4 text-xs sm:text-sm">
                   ✅ {t("contact.form.successMessage")}
                 </p>
               )}
               {error && (
-                <p className="text-red-400 text-center mt-4">
+                <p className="text-red-400 text-center mt-4 text-xs sm:text-sm">
                   ❌ {t("contact.form.errorMessage")}
                 </p>
               )}
             </form>
 
             {/* Social Icons */}
-            <div className="mt-8 pt-8 border-t-2 border-(--accent-cyan)/40">
-              <p className="cyber-caption text-center text-gray-400 mb-4 uppercase tracking-wider">
+            <div className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t-2 border-(--accent-cyan)/40">
+              <p className="cyber-caption text-center text-gray-400 mb-4 uppercase tracking-wider text-xs sm:text-sm">
                 {t("contact.socialConnect")}
               </p>
-              <div className="flex justify-center gap-4">
+              <div className="flex justify-center gap-2 sm:gap-3 md:gap-4 flex-wrap">
                 {[
                   { Icon: Github, href: "https://github.com/agheadof" },
                   {
@@ -171,12 +171,12 @@ const ContactComponent = () => {
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-3 border-2 border-(--accent-cyan) text-(--accent-cyan) rounded-lg
+                    className="p-2 sm:p-3 border-2 border-(--accent-cyan) text-(--accent-cyan) rounded-lg
                                hover:bg-(--accent-cyan) hover:text-(--bg-primary)
                                transition-all duration-300 shadow-[0_0_10px_rgba(43,243,248,0.3)]
                                hover:shadow-[0_0_20px_rgba(43,243,248,0.6)] will-change-transform"
                   >
-                    <Icon className="w-6 h-6" />
+                    <Icon className="w-4 sm:w-5 md:w-6 h-4 sm:h-5 md:h-6" />
                   </a>
                 ))}
               </div>

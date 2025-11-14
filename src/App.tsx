@@ -13,7 +13,7 @@ export default function App() {
   }, [darkMode])
 
   return (
-    <div className=" text-white min-h-screen overflow-x-hidden ">
+    <div className="bg-(--bg-primary) text-white min-h-screen overflow-x-hidden ">
       {/* Content wrapper */}
       <div className="relative ">
         <Header

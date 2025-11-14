@@ -35,15 +35,15 @@ export const Experience = () => {
   // 3. عرض حالة التحميل/الخطأ
   if (status === 'loading' && sortedExperiences.length === 0) {
     return (
-     <section className="py-20 px-6 lg:px-8" id="experience">
+     <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8" id="experience">
         {/* عرض الهيدر والسكيليتون بنفس التنسيق */}
         <div className="max-w-5xl mx-auto">
-          <h2 className="cyber-h2 text-center mb-16 opacity-50">
+          <h2 className="cyber-h2 text-center mb-12 sm:mb-14 md:mb-16 opacity-50 text-2xl sm:text-3xl md:text-4xl">
              {t('experience.title')} 
           </h2>
           <div className="relative">
              {/* خط الـ Timeline (ضروري ليتوسط السكيليتون) */}
-            <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-linear-to-b from-(--accent-cyan) via-(--accent-magenta) to-(--accent-cyan) opacity-40 max-md:hidden"></div>
+            <div className="absolute left-3 sm:left-1/2 top-0 bottom-0 w-0.5 bg-linear-to-b from-(--accent-cyan) via-(--accent-magenta) to-(--accent-cyan) opacity-40 max-md:left-3"></div>
              
              {/* عرض بطاقتي سكيليتون */}
             <ExperienceSkeleton isLeft={true} />
@@ -56,8 +56,8 @@ export const Experience = () => {
 
   if (status === 'failed' && sortedExperiences.length === 0) {
     return (
-      <section className="py-20 px-6 text-center text-red-400" id="experience">
-        <p>{t('common.error_fetching')}: {error}</p>
+      <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8 text-center text-red-400" id="experience">
+        <p className="text-sm sm:text-base">{t('common.error_fetching')}: {error}</p>
       </section>
     );
   }
@@ -65,17 +65,17 @@ export const Experience = () => {
   // إذا كانت القائمة فارغة بعد الجلب
   if (sortedExperiences.length === 0) {
     return (
-      <section className="py-20 px-6 text-center text-white/50" id="experience">
-        <p>{t('experience.no_experiences')}</p>
+      <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8 text-center text-white/50" id="experience">
+        <p className="text-sm sm:text-base">{t('experience.no_experiences')}</p>
       </section>
     );
   }
 
   return (
-    <section className="py-20 px-6 lg:px-8" id="experience">
+    <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8" id="experience">
       <div className="max-w-5xl mx-auto">
         <motion.h2
-          className="cyber-h2 text-center mb-16"
+          className="cyber-h2 text-center mb-12 sm:mb-14 md:mb-16 text-2xl sm:text-3xl md:text-4xl"
           // ... (خصائص الـ motion)
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -87,7 +87,7 @@ export const Experience = () => {
 
         <div className="relative">
           {/* خط الـ Timeline */}
-          <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-linear-to-b from-(--accent-cyan) via-(--accent-magenta) to-(--accent-cyan) opacity-40 max-md:left-3"></div>
+          <div className="absolute left-3 sm:left-1/2 top-0 bottom-0 w-0.5 bg-linear-to-b from-(--accent-cyan) via-(--accent-magenta) to-(--accent-cyan) opacity-40 max-md:left-3"></div>
 
           {/* 4. استخدام البيانات المُجلوبة والمفرزة */}
           {sortedExperiences.map((exp, index) => (

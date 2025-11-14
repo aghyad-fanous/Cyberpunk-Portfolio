@@ -21,12 +21,12 @@ export const GlassCard = ({
 
   return (
     <div
-      className={`relative overflow-hidden  rounded-lg border ${glowStyles[glowColor]} ${className}`}
+      className={`relative overflow-hidden rounded-lg border ${glowStyles[glowColor]} ${className}`}
     >
       {/* طبقة البلور والخلفية */}
       <div className="absolute inset-0 backdrop-blur-md bg-[rgba(0,31,63,0.3)]" />
       {/* المحتوى */}
-      <div className="relative  p-6">{children}</div>
+      <div className="relative p-4 sm:p-5 md:p-6">{children}</div>
     </div>
   )
 }

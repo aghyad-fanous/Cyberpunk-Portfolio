@@ -72,11 +72,11 @@ export const Projects = () => {
   }
 
   return (
-    <section className="py-20 px-6 lg:px-8 bg-[rgba(0,31,63,0.1)]" id="projects">
+    <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8 bg-[rgba(0,31,63,0.1)]" id="projects">
       <div className="max-w-7xl mx-auto">
         <LazyMotion features={domAnimation}>
           <m.h2
-            className="cyber-h2 text-center mb-12"
+            className="cyber-h2 text-center mb-8 sm:mb-10 md:mb-12 text-2xl sm:text-3xl md:text-4xl"
             style={{
               color: 'var(--accent-cyan)',
               textShadow: '0 0 20px var(--accent-cyan)',
@@ -97,7 +97,7 @@ export const Projects = () => {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: '-50px' }}
-            className="grid lg:grid-cols-2 gap-8"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-y-8 sm:gap-6 md:gap-8"
           >
             {staticProjects.map((project) => (
               <m.div
